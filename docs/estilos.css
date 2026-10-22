@@ -1,0 +1,182 @@
+/* Portafolio de servicios de EAx. Marca: 02_PRODUCCION/visual.md del repositorio de EAx
+   (paleta navy y ámbar, cuatro papeles tipográficos). Los colores se escriben solo aquí arriba. */
+
+@font-face { font-family: 'Archivo Black'; src: url('fuentes/ArchivoBlack-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('fuentes/InstrumentSerif-Italic.woff2') format('woff2'); font-style: italic; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('fuentes/Inter-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('fuentes/Inter-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('fuentes/Inter-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('fuentes/Inter-ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('fuentes/JetBrainsMono-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+:root {
+  --navy: #0f172a;
+  --navy-2: #1e293b;
+  --ambar: #f59e0b;
+  --ambar-osc: #d97706;
+  --pizarra: #475569;
+  --claro: #f8fafc;
+  --blanco: #ffffff;
+  --borde: #e2e8f0;
+  --claro-suave: rgba(248, 250, 252, 0.76);
+  --borde-oscuro: rgba(248, 250, 252, 0.16);
+  --sombra: 0 6px 44px rgba(15, 23, 42, 0.14);
+
+  --impacto: 'Archivo Black', 'Arial Black', sans-serif;
+  --editorial: 'Instrument Serif', Georgia, serif;
+  --cuerpo: 'Inter', system-ui, sans-serif;
+  --tecnico: 'JetBrains Mono', ui-monospace, monospace;
+
+  --ancho: 72rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--claro);
+  color: var(--navy);
+  font: 400 17px/1.6 var(--cuerpo);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+p { margin: 0 0 1rem; }
+
+.contenedor { width: min(var(--ancho), 100% - 2rem); margin-inline: auto; }
+
+/* Letra: rótulo técnico, voz editorial y golpe de impacto (patrón P33 de la marca) */
+.rotulo {
+  font: 400 0.78rem/1.4 var(--tecnico);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pizarra);
+  margin: 0 0 1.1rem;
+}
+.oscuro .rotulo { color: var(--ambar); }
+.titular { margin: 0 0 1.5rem; font-weight: 400; line-height: 1.05; }
+.voz { display: block; font-family: var(--editorial); font-style: italic; font-size: clamp(1.9rem, 4.6vw, 3.2rem); line-height: 1.1; }
+.golpe { display: block; font-family: var(--impacto); text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(2.3rem, 7vw, 5.2rem); line-height: 1.05; }
+.clave { color: var(--ambar); }
+.titulo-seccion { font: 400 clamp(1.8rem, 4.4vw, 3rem)/1.08 var(--impacto); letter-spacing: -0.01em; margin: 0 0 1.4rem; max-width: 22ch; }
+h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
+.lectura { max-width: 62ch; }
+
+/* Botones y enlaces */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.45rem;
+  border-radius: 12px;
+  background: var(--ambar);
+  color: var(--navy);
+  font: 700 1rem/1.2 var(--cuerpo);
+  text-decoration: none;
+  transition: background-color 0.15s ease-out;
+}
+.boton:hover { background: var(--ambar-osc); }
+.boton--hueco { background: transparent; color: var(--claro); border: 1.5px solid var(--borde-oscuro); }
+.boton--hueco:hover { background: var(--navy-2); }
+.enlace { color: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: var(--ambar); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+:focus-visible { outline: 3px solid var(--ambar); outline-offset: 3px; border-radius: 4px; }
+
+/* Portada */
+.oscuro { background: var(--navy); color: var(--claro); }
+.portada { padding-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+.barra { display: flex; justify-content: space-between; align-items: center; padding-block: 1.25rem; }
+.firma { font: 800 1.7rem/1 var(--cuerpo); letter-spacing: -0.02em; color: var(--ambar); text-decoration: none; }
+.barra .enlace { font-size: 0.95rem; }
+.portada__cuerpo { padding-top: clamp(2.5rem, 8vw, 5.5rem); }
+.portada .voz { color: var(--claro-suave); }
+.entrada { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--claro-suave); max-width: 52ch; margin-bottom: 2rem; }
+.acciones { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.servicios-indice {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+  margin: 2.4rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid var(--borde-oscuro);
+  font: 400 0.82rem/1.4 var(--tecnico);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.servicios-indice a { color: var(--claro-suave); text-decoration: none; }
+.servicios-indice a:hover { color: var(--ambar); }
+.servicios-indice span { color: var(--ambar); margin-right: 0.45rem; }
+
+/* La cinta: lo que ya funciona, antes que cualquier explicación */
+.cinta {
+  list-style: none;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: clamp(0.6rem, 2vw, 1.4rem);
+  align-items: end;
+}
+.cinta a { display: block; color: var(--claro-suave); text-decoration: none; }
+.cinta img { border-radius: 10px; border: 1px solid var(--borde-oscuro); }
+.cinta span { display: block; margin-top: 0.6rem; font: 400 0.72rem/1.3 var(--tecnico); letter-spacing: 0.08em; text-transform: uppercase; }
+.cinta a:hover span { color: var(--ambar); }
+
+/* Secciones: el ritmo cambia según lo que agrupa cada una */
+.seccion { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+.seccion--corta { padding-block: clamp(3rem, 7vw, 5rem); }
+
+/* Díptico: cada afirmación con su prueba al lado */
+.caso { display: grid; gap: 1.4rem 3rem; align-items: center; margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.caso figure { margin: 0; }
+.caso figure img { border-radius: 12px; border: 1px solid var(--borde); box-shadow: var(--sombra); }
+.caso figcaption { margin-top: 0.7rem; font: 400 0.75rem/1.4 var(--tecnico); letter-spacing: 0.06em; color: var(--pizarra); }
+.rubro { font: 400 0.8rem/1.4 var(--tecnico); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pizarra); margin-bottom: 1rem; }
+.equipo { margin-top: 1.6rem; padding-left: 1rem; border-left: 3px solid var(--ambar); max-width: 62ch; }
+
+/* Diagnóstico */
+.dos-columnas { display: grid; gap: 2.5rem 4rem; }
+.modalidades { margin: 1.8rem 0; display: grid; gap: 0.9rem; }
+.modalidades div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--borde-oscuro); }
+.modalidades dt { font: 400 0.8rem/1.6 var(--tecnico); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ambar); }
+.modalidades dd { margin: 0; }
+.nota { color: var(--claro-suave); font-size: 0.95rem; }
+.prueba { align-self: start; background: var(--navy-2); border-radius: 16px; padding: clamp(1.4rem, 4vw, 2.2rem); }
+.prueba__cifra { font: 400 clamp(2.4rem, 6vw, 3.6rem)/1 var(--impacto); color: var(--ambar); margin: 0.4rem 0 1rem; }
+
+/* Capacitación */
+.formatos { list-style: none; margin: 0 0 2.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.formatos li { font: 400 0.78rem/1 var(--tecnico); letter-spacing: 0.06em; padding: 0.6rem 0.8rem; border: 1px solid var(--borde); border-radius: 999px; background: var(--blanco); }
+.personas { display: grid; gap: 2rem 3rem; }
+.persona { padding-top: 1.2rem; border-top: 3px solid var(--navy); }
+.remate { margin-top: 2.5rem; font-family: var(--editorial); font-style: italic; font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.25; max-width: 36ch; }
+
+/* Consultoría */
+.sistema { list-style: none; counter-reset: paso; margin: 2.2rem 0; padding: 0; display: grid; gap: 0 3rem; }
+.sistema li { counter-increment: paso; display: grid; grid-template-columns: 3rem 1fr; padding-block: 1rem; border-top: 1px solid var(--borde); }
+.sistema li::before { content: counter(paso, decimal-leading-zero); font: 400 0.85rem/1.7 var(--tecnico); color: var(--pizarra); }
+
+/* Cierre: la única banda en ámbar, porque es la llamada */
+.cierre { background: var(--ambar); color: var(--navy); }
+.cierre .voz { color: var(--navy-2); }
+.cierre .boton { background: var(--navy); color: var(--claro); }
+.cierre .boton:hover { background: var(--navy-2); }
+.cierre :focus-visible { outline-color: var(--navy); }
+.cierre__numero { font: 400 0.9rem/1.4 var(--tecnico); letter-spacing: 0.1em; margin-top: 1rem; }
+
+.pie { padding-block: 2.2rem; font-size: 0.92rem; color: var(--claro-suave); }
+.pie .contenedor { display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; align-items: baseline; justify-content: space-between; }
+
+@media (min-width: 52rem) {
+  .caso { grid-template-columns: 7fr 5fr; }
+  .caso--invertido { grid-template-columns: 5fr 7fr; }
+  .caso--invertido figure { order: 2; }
+  .dos-columnas { grid-template-columns: 7fr 5fr; }
+  .personas { grid-template-columns: 1fr 1fr; }
+  .sistema { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .boton, .boton--hueco { transition: none; }
+}

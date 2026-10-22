@@ -1,0 +1,15 @@
+{
+  "name": "servicios-eax",
+  "private": true,
+  "description": "Portafolio de servicios de EAx (GitHub Pages, carpeta docs/)",
+  "type": "module",
+  "scripts": {
+    "capturas": "node herramientas/capturar_tiendas.mjs",
+    "revisar": "python pruebas/revisar_pagina.py docs",
+    "test": "python -m unittest discover -s pruebas -v",
+    "vista-previa": "node herramientas/vista_previa.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "24.38.0"
+  }
+}

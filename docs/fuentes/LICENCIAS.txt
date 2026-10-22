@@ -1,0 +1,10 @@
+Fuentes de la página. Todas con licencia SIL Open Font License 1.1 (uso comercial y alojarlas en el
+propio proyecto, permitidos). Copiadas de EAx_MARCA_PERSONAL/02_PRODUCCION/REMOTION/eax-video/public/fonts/.
+Licencias verificadas el 2026-08-16 (visual.md §1 y §1b del repositorio de EAx).
+
+- Archivo Black (Omnibus-Type)       https://fonts.google.com/specimen/Archivo+Black
+- Instrument Serif (Instrument)      https://fonts.google.com/specimen/Instrument+Serif
+- Inter (Rasmus Andersson)           https://fonts.google.com/specimen/Inter
+- JetBrains Mono (JetBrains)         https://fonts.google.com/specimen/JetBrains+Mono
+
+Texto de la licencia: https://openfontlicense.org/open-font-license-official-text/
