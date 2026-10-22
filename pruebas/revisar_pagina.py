@@ -40,6 +40,7 @@ PROHIBIDAS = [
 # Van como huella (sha256 de la palabra en minúsculas y sin tildes): el repositorio es público
 # y el nombre no se escribe aquí.
 NOMBRES_PRIVADOS = {"9e88b067408182d0bd525120e9ba2607e19b0dfa17b48582d2d405fc52dc4a1a"}
+LIMITE_VIDEO = 8_000_000  # bytes: un minuto a 720x900 pesa unos 4 MB
 HEX = re.compile(r"#[0-9a-fA-F]{3,8}\b")
 RGB = re.compile(r"\brgba?\(")
 
@@ -159,7 +160,7 @@ def revisar(carpeta: Path) -> list[str]:
 
     # R07 · recursos: los locales existen y nada se carga de otro servidor
     for t, a in lector.etiquetas:
-        for clave in ("href", "src"):
+        for clave in ("href", "src", "data-src", "poster"):
             ruta = a.get(clave, "")
             if not ruta or ruta.startswith(("#", "mailto:", "tel:")):
                 continue
@@ -213,6 +214,32 @@ def revisar(carpeta: Path) -> list[str]:
         if t == "a" and a.get("target") == "_blank" and "noopener" not in a.get("rel", ""):
             problemas.append(f"R13 target=_blank sin rel=noopener: {a.get('href')}")
 
+    # R14 · videos: livianos, en silencio hasta que se pida el sonido, con portada y descripción,
+    # y sin reproducirse solos para quien pide movimiento reducido
+    videos = [a for t, a in lector.etiquetas if t == "video"]
+    for a in videos:
+        fuente = a.get("data-src") or a.get("src", "")
+        nombre = fuente or "(sin archivo)"
+        for clave in ("muted", "playsinline"):
+            if clave not in a:
+                problemas.append(f"R14 video sin {clave}: {nombre}")
+        if a.get("preload") != "none":
+            problemas.append(f"R14 video que se descarga antes de verse (preload): {nombre}")
+        if not a.get("aria-label", "").strip():
+            problemas.append(f"R14 video sin descripción (aria-label): {nombre}")
+        if not (a.get("poster") and local(carpeta, a["poster"]).is_file()):
+            problemas.append(f"R14 video sin portada: {nombre}")
+        archivo = local(carpeta, fuente) if fuente and not es_externa(fuente) else None
+        if archivo is None or not archivo.is_file():
+            problemas.append(f"R14 video que no existe: {nombre}")
+        elif archivo.stat().st_size > LIMITE_VIDEO:
+            problemas.append(f"R14 video de más de {LIMITE_VIDEO // 1_000_000} MB: {nombre}")
+    if videos:
+        guiones = " ".join((carpeta / a["src"]).read_text(encoding="utf-8") for t, a in lector.etiquetas
+                           if t == "script" and a.get("src") and not es_externa(a["src"]) and (carpeta / a["src"]).is_file())
+        if "prefers-reduced-motion" not in guiones:
+            problemas.append("R14 los videos se reproducen solos sin respetar prefers-reduced-motion")
+
     return problemas
 
 
@@ -221,5 +248,5 @@ if __name__ == "__main__":
     encontrados = revisar(carpeta)
     for p in encontrados:
         print(p)
-    print(f"{len(encontrados)} problemas" if encontrados else "La página pasa las 13 reglas")
+    print(f"{len(encontrados)} problemas" if encontrados else "La página pasa las 14 reglas")
     sys.exit(1 if encontrados else 0)

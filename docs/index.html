@@ -18,6 +18,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="fuentes/ArchivoBlack-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="estilos.css">
+  <script src="videos.js" defer></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
     </div>
 
     <div class="portada__cuerpo" id="inicio">
-      <p class="rotulo">EAx · Erick Albornoz y equipo · Cali, Colombia</p>
+      <p class="pildora">EAx · Erick Albornoz y equipo · Cali, Colombia</p>
       <h1 class="titular">
         <span class="voz">Tiendas, sistemas y clases que</span>
         <span class="golpe">ya están <span class="clave">funcionando</span></span>
@@ -37,26 +38,58 @@
       <p class="entrada">Primero ordenamos cómo trabaja tu negocio; después lo automatizamos. Hacemos diagnósticos, sistemas a la medida, clases de IA y consultoría, y aquí está lo que ya entregamos.</p>
       <div class="acciones">
         <a class="boton" href="https://wa.me/573103761189?text=Hola%2C%20vi%20el%20portafolio%20de%20EAx%20y%20quiero%20saber%20por%20d%C3%B3nde%20empezar." target="_blank" rel="noopener">Cuéntanos qué quieres resolver</a>
-        <a class="boton boton--hueco" href="#implementacion">Ver el trabajo</a>
+        <a class="boton boton--hueco" href="#videos">Ver los videos</a>
       </div>
-
-      <ul class="cinta" aria-label="Tiendas hechas por el equipo">
-        <li><a href="#caso-rocio"><img src="img/jabones-rocio.webp" width="1280" height="800" alt="Página de inicio de la tienda de Jabones Rocío"><span>Jabones Rocío</span></a></li>
-        <li><a href="#caso-sos"><img src="img/sos-natural.webp" width="1280" height="800" alt="Ficha de un jabón en la tienda de S.O.S. Natural, con el botón para agregar al carrito"><span>S.O.S. Natural</span></a></li>
-        <li><a href="#caso-verde-vivo"><img src="img/verde-vivo-producto.webp" width="1280" height="800" alt="Ficha de un champú sólido en la tienda de Verde Vivo Essentials"><span>Verde Vivo</span></a></li>
-      </ul>
 
       <ul class="servicios-indice">
         <li><a href="#implementacion"><span>01</span>Implementación</a></li>
         <li><a href="#diagnostico"><span>02</span>Diagnóstico</a></li>
         <li><a href="#capacitacion"><span>03</span>Capacitación</a></li>
         <li><a href="#consultoria"><span>04</span>Consultoría</a></li>
+        <li><a href="#caso-eax"><span>05</span>El caso EAx</a></li>
       </ul>
     </div>
   </div>
 </header>
 
 <main>
+
+  <section class="oscuro muro" id="videos" aria-labelledby="t-videos">
+    <div class="contenedor">
+      <header class="cabecera-centro">
+        <p class="pildora">4 videos · sistemas funcionando</p>
+        <h2 class="titular titular--centro" id="t-videos">
+          <span class="voz">Míralo</span>
+          <span class="golpe">por <span class="clave">dentro</span></span>
+        </h2>
+      </header>
+
+      <div class="muro__rejilla">
+        <figure class="muro__item muro__item--grande" id="video-minuto">
+          <div class="muro__marco"><video muted playsinline loop preload="none" width="720" height="900" poster="video/en-un-minuto.webp" data-src="video/en-un-minuto.mp4" aria-label="Video: Erick muestra en un minuto la tienda, el pedido que llega a WhatsApp, el panel y el inventario de Jabones Rocío"></video></div>
+          <figcaption class="muro__pie"><span class="muro__etiqueta">01 · En un minuto</span><button class="muro__sonido" type="button" aria-pressed="false" aria-label="Escuchar «En un minuto»"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button><a class="solo-lectores" href="video/en-un-minuto.mp4">Abrir el video</a></figcaption>
+        </figure>
+        <figure class="muro__item" id="video-pedido">
+          <div class="muro__marco"><video muted playsinline loop preload="none" width="720" height="900" poster="video/donde-cae-el-pedido.webp" data-src="video/donde-cae-el-pedido.mp4" aria-label="Video: un pedido de prueba, desde el carrito hasta el chat de WhatsApp y el panel del negocio"></video></div>
+          <figcaption class="muro__pie"><span class="muro__etiqueta">02 · Dónde cae el pedido</span><button class="muro__sonido" type="button" aria-pressed="false" aria-label="Escuchar «Dónde cae el pedido»"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button><a class="solo-lectores" href="video/donde-cae-el-pedido.mp4">Abrir el video</a></figcaption>
+        </figure>
+        <figure class="muro__item" id="video-panel">
+          <div class="muro__marco"><video muted playsinline loop preload="none" width="720" height="900" poster="video/el-panel-por-dentro.webp" data-src="video/el-panel-por-dentro.mp4" aria-label="Video: el panel de pedidos con su estado y el control de inventario, con los datos de clientes difuminados"></video></div>
+          <figcaption class="muro__pie"><span class="muro__etiqueta">03 · El panel por dentro</span><button class="muro__sonido" type="button" aria-pressed="false" aria-label="Escuchar «El panel por dentro»"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button><a class="solo-lectores" href="video/el-panel-por-dentro.mp4">Abrir el video</a></figcaption>
+        </figure>
+        <figure class="muro__item" id="video-carrito">
+          <div class="muro__marco"><video muted playsinline loop preload="none" width="720" height="900" poster="video/dos-tiendas-con-carrito.webp" data-src="video/dos-tiendas-con-carrito.mp4" aria-label="Video: las tiendas de S.O.S. Natural y Jabones Rocío lado a lado, con su carrito"></video></div>
+          <figcaption class="muro__pie"><span class="muro__etiqueta">04 · Carrito o WhatsApp</span><button class="muro__sonido" type="button" aria-pressed="false" aria-label="Escuchar «Carrito o WhatsApp»"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button><a class="solo-lectores" href="video/dos-tiendas-con-carrito.mp4">Abrir el video</a></figcaption>
+        </figure>
+        <div class="muro__llamada">
+          <p class="rotulo">Tu negocio</p>
+          <p class="muro__pregunta">¿Cuál de estos le serviría a tu negocio?</p>
+          <a class="boton" href="https://wa.me/573103761189?text=Hola%2C%20vi%20los%20videos%20del%20portafolio%20de%20EAx%20y%20quiero%20saber%20cu%C3%A1l%20me%20servir%C3%ADa." target="_blank" rel="noopener">Pregúntanos</a>
+        </div>
+      </div>
+      <p class="muro__nota">Toca el ícono de sonido para escuchar a Erick. Los datos de los clientes van difuminados y el pedido es de prueba.</p>
+    </div>
+  </section>
 
   <section class="seccion" id="implementacion" aria-labelledby="t-implementacion">
     <div class="contenedor">
@@ -73,7 +106,7 @@
           <h3>Jabones Rocío</h3>
           <p class="rubro">Insumos para jabonería artesanal</p>
           <p>El cliente arma su pedido en el carrito y el pedido llega completo a WhatsApp. Ahí mismo queda en el panel del negocio con su estado: pendiente, aceptado o enviado. El inventario avisa cuando algo se está acabando, y después se le sumó la lectura con código de barras.</p>
-          <a class="enlace" href="https://jabonesrocio.com.co" target="_blank" rel="noopener">Ver la tienda ↗</a>
+          <p class="enlaces"><a class="enlace" href="https://jabonesrocio.com.co" target="_blank" rel="noopener">Ver la tienda ↗</a> <a class="enlace" href="#video-pedido">Ver el pedido en video ↑</a></p>
         </div>
       </article>
 
@@ -86,7 +119,7 @@
           <h3>S.O.S. Natural</h3>
           <p class="rubro">Cosmética natural, jabonería e insumos</p>
           <p>Tienda en línea con carrito, cuenta del cliente con sus pedidos y un botón para preguntar por WhatsApp desde cada producto. Se construyó sobre la base de Jabones Rocío: lo que ya funcionaba en una tienda se aprovechó en la otra.</p>
-          <a class="enlace" href="https://sosnaturalcolombia.com" target="_blank" rel="noopener">Ver la tienda ↗</a>
+          <p class="enlaces"><a class="enlace" href="https://sosnaturalcolombia.com" target="_blank" rel="noopener">Ver la tienda ↗</a> <a class="enlace" href="#video-carrito">Ver las dos tiendas en video ↑</a></p>
         </div>
       </article>
 
@@ -99,7 +132,7 @@
           <h3>Verde Vivo Essentials</h3>
           <p class="rubro">Cosmética botánica artesanal · Pereira</p>
           <p>Catálogo con la ficha de cada producto, carrito de pedido y consulta por WhatsApp con el mensaje ya escrito, para que el cliente no tenga que explicar qué quiere.</p>
-          <a class="enlace" href="https://verdevivoessentials.com" target="_blank" rel="noopener">Ver la tienda ↗</a>
+          <p class="enlaces"><a class="enlace" href="https://verdevivoessentials.com" target="_blank" rel="noopener">Ver la tienda ↗</a></p>
         </div>
       </article>
 
@@ -154,23 +187,56 @@
     </div>
   </section>
 
-  <section class="seccion seccion--corta" id="consultoria" aria-labelledby="t-consultoria">
+  <section class="seccion seccion--corta consultoria" id="consultoria" aria-labelledby="t-consultoria">
     <div class="contenedor">
       <p class="rotulo">04 · Consultoría</p>
-      <h2 class="titular" id="t-consultoria">
-        <span class="voz">Lo probamos</span>
-        <span class="golpe">primero en <span class="clave">casa</span></span>
+      <h2 class="titulo-seccion" id="t-consultoria">Decisiones de tecnología escritas, con su porqué</h2>
+      <p class="lectura">Te acompañamos a decidir qué comprar, qué automatizar y qué no: sesiones puntuales, un plan mensual o un proyecto para trazar la ruta por fases. Cada decisión queda escrita, para que tu equipo la pueda seguir sin depender de una persona.</p>
+      <p><a class="enlace" href="#caso-eax">Mira cómo lo hicimos con EAx ↓</a></p>
+    </div>
+  </section>
+
+  <section class="seccion oscuro caso-eax" id="caso-eax" aria-labelledby="t-caso-eax">
+    <div class="contenedor">
+      <p class="rotulo">05 · El caso EAx</p>
+      <h2 class="titular" id="t-caso-eax">
+        <span class="voz">Toda una marca en</span>
+        <span class="golpe">una sola <span class="clave">carpeta</span></span>
       </h2>
-      <p class="lectura">Te acompañamos a decidir qué comprar, qué automatizar y qué no, con cada decisión escrita y su porqué. Antes de ofrecerlo, lo hicimos con EAx: toda la marca funciona como un sistema.</p>
-      <ol class="sistema">
-        <li>Una base de conocimiento que la IA lee antes de hacer cualquier cosa, con un documento dueño por tema.</li>
-        <li>Cada decisión del negocio escrita con su porqué. Si dos documentos chocan, se resuelve con una regla, no de memoria.</li>
-        <li>Ventas con precios, propuestas, seguimiento y un tablero que mide conversaciones y pagos, no publicaciones.</li>
-        <li>Contenido con plan, guía de voz y piezas hechas con código.</li>
-        <li>Clases y entregables con una plantilla para cada servicio.</li>
-        <li>Tareas que la IA hace leyendo esa base, y la hoja donde trabaja el equipo.</li>
-      </ol>
-      <p class="lectura">Así, una tarea se le puede pasar a otra persona o a la IA sin explicarla desde cero. Aquí no hay cifras de ventas: lo que se muestra es cómo quedó armado. Sirve igual para una marca personal, un emprendimiento o una empresa que quiere dejar escrito lo que sabe.</p>
+      <div class="dos-columnas">
+        <div>
+          <p class="lectura">EAx es su propio primer cliente. Una marca que vende consultoría, sistemas y clases tiene muchas piezas sueltas: quién es y a quién le habla, qué publica, cómo vende, qué investiga, qué enseña y qué entrega. Cuando eso vive en la memoria de una persona y en chats, todo sale distinto cada vez y nada se puede delegar.</p>
+          <p class="lectura">Primero se ordenó el proceso y después se automatizó, igual que con un cliente. Todo vive en un repositorio: una sola carpeta ordenada que la IA lee antes de hacer cualquier cosa, con un documento dueño por tema.</p>
+          <ul class="cifras" aria-label="La carpeta en números, a octubre de 2026">
+            <li><strong>30</strong> decisiones del negocio escritas, cada una con su porqué</li>
+            <li><strong>+15</strong> skills: tareas que la IA hace leyendo la carpeta, como contenido, voz, investigación, diagnóstico y prospección</li>
+            <li><strong>77</strong> pruebas que cuidan el envío automático por WhatsApp</li>
+            <li><strong>5</strong> personas trabajan sobre esta base</li>
+          </ul>
+        </div>
+        <div class="arbol" role="group" aria-label="Así está organizada la carpeta de EAx">
+          <p class="arbol__raiz">EAx_MARCA_PERSONAL/</p>
+          <ul>
+            <li><code>00_GOBIERNO</code><span>Cómo se ordena todo y qué documento manda en cada tema</span></li>
+            <li><code>01_CORE</code><span>Quién es la marca, a quién le habla y las decisiones del negocio</span></li>
+            <li><code>02_PRODUCCION</code><span>Plan de contenido, guía de voz, carruseles y videos hechos con código</span></li>
+            <li><code>03_COMERCIAL</code><span>Propuestas, respuestas, seguimiento y el tablero de conversaciones y pagos</span></li>
+            <li><code>04_INVESTIGACION</code><span>Mercado, competencia y los casos con su evidencia</span></li>
+            <li><code>05_FORMACION</code><span>Los cursos y las clases a la medida</span></li>
+            <li><code>06_ENTREGABLES</code><span>Las plantillas de lo que recibe cada cliente</span></li>
+            <li><code>07_OPORTUNIDADES</code><span>Proyectos y contratos que llegan aparte</span></li>
+            <li><code>08_EQUIPO</code><span>El trabajo con el equipo: prospección, implementación y acuerdos</span></li>
+            <li><code>09_AUTOMATIZACIONES</code><span>El envío por WhatsApp con su panel</span></li>
+            <li><code>.claude</code><span>Las instrucciones y las skills con que trabaja la IA</span></li>
+          </ul>
+        </div>
+      </div>
+      <ul class="resultados">
+        <li>Una tarea se le puede pasar a otra persona o a la IA sin explicarla desde cero.</li>
+        <li>Cada pieza, propuesta o clase sale con el mismo criterio.</li>
+        <li>Lo que se aprende queda escrito para la siguiente vez.</li>
+      </ul>
+      <p class="nota">Aquí no hay cifras de ventas: lo que se muestra es cómo quedó armado. Sirve igual para una marca personal, un emprendimiento o una empresa que quiere dejar escrito lo que sabe.</p>
     </div>
   </section>
 

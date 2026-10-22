@@ -21,6 +21,8 @@
   --claro-suave: rgba(248, 250, 252, 0.76);
   --borde-oscuro: rgba(248, 250, 252, 0.16);
   --sombra: 0 6px 44px rgba(15, 23, 42, 0.14);
+  --sombra-honda: 0 30px 80px -40px rgba(0, 0, 0, 0.7), 0 6px 20px -10px rgba(0, 0, 0, 0.5);
+  --velo: rgba(15, 23, 42, 0.7);
 
   --impacto: 'Archivo Black', 'Arial Black', sans-serif;
   --editorial: 'Instrument Serif', Georgia, serif;
@@ -107,20 +109,78 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .servicios-indice a:hover { color: var(--ambar); }
 .servicios-indice span { color: var(--ambar); margin-right: 0.45rem; }
 
-/* La cinta: lo que ya funciona, antes que cualquier explicación */
-.cinta {
-  list-style: none;
-  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: clamp(0.6rem, 2vw, 1.4rem);
-  align-items: end;
+
+/* Píldora: el rótulo técnico con un punto ámbar (portada y muro de videos) */
+.pildora {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.2rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--borde-oscuro);
+  border-radius: 999px;
+  font: 400 0.72rem/1.3 var(--tecnico);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--claro-suave);
 }
-.cinta a { display: block; color: var(--claro-suave); text-decoration: none; }
-.cinta img { border-radius: 10px; border: 1px solid var(--borde-oscuro); }
-.cinta span { display: block; margin-top: 0.6rem; font: 400 0.72rem/1.3 var(--tecnico); letter-spacing: 0.08em; text-transform: uppercase; }
-.cinta a:hover span { color: var(--ambar); }
+.pildora::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ambar); flex: none; }
+
+/* Muro de videos: lo que ya funciona, antes que cualquier explicación */
+.muro { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--borde-oscuro); }
+.cabecera-centro { text-align: center; max-width: 46rem; margin: 0 auto clamp(1.8rem, 5vw, 2.8rem); }
+.titular--centro .voz, .titular--centro .golpe { text-align: center; }
+.muro .voz { color: var(--claro-suave); }
+.muro__rejilla { display: grid; gap: 0.7rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.muro__item { margin: 0; display: flex; flex-direction: column; gap: 0.55rem; min-width: 0; }
+.muro__item--grande { grid-column: span 2; }
+.muro__marco {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--borde-oscuro);
+  background: var(--navy-2);
+  box-shadow: var(--sombra-honda);
+}
+.muro__marco video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.muro__pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.6rem; }
+.muro__etiqueta { font: 400 0.72rem/1.3 var(--tecnico); letter-spacing: 0.06em; color: var(--claro-suave); }
+.muro__sonido {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.75rem;
+  border: 1px solid var(--borde-oscuro);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--claro);
+  font: 400 0.7rem/1 var(--tecnico);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+.muro__sonido:hover { background: var(--navy-2); }
+.muro__item:not(.muro__item--grande) .muro__sonido { padding: 0.42rem 0.55rem; }
+.muro__item:not(.muro__item--grande) .muro__sonido span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.muro__sonido[aria-pressed="true"] { background: var(--ambar); color: var(--navy); border-color: var(--ambar); }
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.solo-lectores:focus { position: static; width: auto; height: auto; overflow: visible; clip-path: none; color: var(--claro-suave); font: 400 0.72rem/1.3 var(--tecnico); }
+.muro__llamada {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.9rem;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  border-radius: 16px;
+  border: 1px solid var(--borde-oscuro);
+  background: var(--navy-2);
+}
+.muro__llamada .rotulo { margin: 0; }
+.muro__pregunta { margin: 0; font: 400 clamp(1.25rem, 2.4vw, 1.7rem)/1.15 var(--editorial); font-style: italic; }
+.muro__llamada .boton { align-self: flex-start; }
+.muro__nota { margin: 1.4rem auto 0; text-align: center; max-width: 60ch; color: var(--claro-suave); font: 400 0.75rem/1.5 var(--tecnico); letter-spacing: 0.04em; }
 
 /* Secciones: el ritmo cambia según lo que agrupa cada una */
 .seccion { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
@@ -156,6 +216,25 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .sistema li { counter-increment: paso; display: grid; grid-template-columns: 3rem 1fr; padding-block: 1rem; border-top: 1px solid var(--borde); }
 .sistema li::before { content: counter(paso, decimal-leading-zero); font: 400 0.85rem/1.7 var(--tecnico); color: var(--pizarra); }
 
+
+/* Consultoría y el caso EAx */
+.consultoria { padding-bottom: clamp(2rem, 5vw, 3rem); }
+.enlaces { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+.caso-eax .titular { margin-bottom: 2.2rem; }
+.caso-eax .voz { color: var(--claro-suave); }
+.caso-eax .lectura { color: var(--claro-suave); }
+.cifras { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
+.cifras li { display: grid; grid-template-columns: 4.2rem 1fr; gap: 1rem; align-items: baseline; padding-top: 0.9rem; border-top: 1px solid var(--borde-oscuro); }
+.cifras strong { font: 400 1.9rem/1 var(--impacto); color: var(--ambar); }
+.arbol { align-self: start; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid var(--borde-oscuro); border-radius: 16px; background: var(--navy-2); box-shadow: var(--sombra-honda); }
+.arbol__raiz { margin: 0 0 0.8rem; font: 400 0.9rem/1.4 var(--tecnico); color: var(--claro); }
+.arbol ul { list-style: none; margin: 0; padding: 0 0 0 1rem; border-left: 1px solid var(--borde-oscuro); display: grid; gap: 0.75rem; }
+.arbol li { display: grid; gap: 0.15rem; }
+.arbol code { font: 400 0.82rem/1.4 var(--tecnico); color: var(--ambar); }
+.arbol span { font-size: 0.92rem; line-height: 1.45; color: var(--claro-suave); }
+.resultados { list-style: none; margin: 2.8rem 0 1.2rem; padding: 0; display: grid; gap: 0.9rem; max-width: 62ch; }
+.resultados li { padding-left: 1rem; border-left: 3px solid var(--ambar); }
+
 /* Cierre: la única banda en ámbar, porque es la llamada */
 .cierre { background: var(--ambar); color: var(--navy); }
 .cierre .voz { color: var(--navy-2); }
@@ -174,9 +253,12 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
   .dos-columnas { grid-template-columns: 7fr 5fr; }
   .personas { grid-template-columns: 1fr 1fr; }
   .sistema { grid-template-columns: 1fr 1fr; }
+  .muro__rejilla { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .muro__item--grande { grid-row: span 2; }
+  .muro__item--grande .muro__marco { flex: 1; aspect-ratio: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .boton, .boton--hueco { transition: none; }
+  .boton, .boton--hueco, .muro__sonido { transition: none; }
 }

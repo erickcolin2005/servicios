@@ -22,12 +22,18 @@ class LaPagina(unittest.TestCase):
     def test_pasa_todas_las_reglas(self):
         self.assertEqual(revisar(DOCS), [])
 
-    def test_tiene_los_cuatro_servicios_y_los_tres_casos_de_implementacion(self):
+    def test_tiene_los_cuatro_servicios_el_caso_eax_y_los_tres_casos_de_implementacion(self):
         html = (DOCS / "index.html").read_text(encoding="utf-8")
-        for id_ in ("implementacion", "diagnostico", "capacitacion", "consultoria"):
+        for id_ in ("implementacion", "diagnostico", "capacitacion", "consultoria", "caso-eax", "videos"):
             self.assertIn(f'id="{id_}"', html)
         for sitio in ("jabonesrocio.com.co", "sosnaturalcolombia.com", "verdevivoessentials.com"):
             self.assertIn(f"https://{sitio}", html)
+
+
+    def test_el_muro_tiene_los_cuatro_videos_aprobados(self):
+        html = (DOCS / "index.html").read_text(encoding="utf-8")
+        for video in ("en-un-minuto", "donde-cae-el-pedido", "el-panel-por-dentro", "dos-tiendas-con-carrito"):
+            self.assertIn(f'data-src="video/{video}.mp4"', html)
 
 
 class CadaReglaAtrapaSuDefecto(unittest.TestCase):
@@ -110,6 +116,18 @@ class CadaReglaAtrapaSuDefecto(unittest.TestCase):
     def test_r13_pestana_nueva_sin_noopener(self):
         self.mutar("index.html", lambda h: h.replace('rel="noopener"', 'rel="external"', 1))
         self.marca("R13")
+
+    def test_r14_video_sin_portada(self):
+        self.mutar("index.html", lambda h: h.replace('poster="video/en-un-minuto.webp" ', "", 1))
+        self.marca("R14")
+
+    def test_r14_video_que_se_descarga_antes_de_verse(self):
+        self.mutar("index.html", lambda h: h.replace('preload="none"', 'preload="auto"', 1))
+        self.marca("R14")
+
+    def test_r14_reproduccion_sin_respetar_movimiento_reducido(self):
+        self.mutar("videos.js", lambda j: j.replace("prefers-reduced-motion", "prefers-color-scheme"))
+        self.marca("R14")
 
 
 if __name__ == "__main__":
