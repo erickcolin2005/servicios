@@ -26,8 +26,14 @@ class LaPagina(unittest.TestCase):
         html = (DOCS / "index.html").read_text(encoding="utf-8")
         for id_ in ("implementacion", "diagnostico", "capacitacion", "consultoria", "caso-eax", "videos"):
             self.assertIn(f'id="{id_}"', html)
-        for sitio in ("jabonesrocio.com.co", "sosnaturalcolombia.com", "verdevivoessentials.com"):
+        for sitio in ("jabonesrocio.com.co", "sosnaturalcolombia.com", "verdevivoessentials.com", "www.jmlucent.com",
+                      "royalblue-stingray-925697.hostingersite.com"):
             self.assertIn(f"https://{sitio}", html)
+
+    def test_enlaza_los_portafolios_de_frank_y_jose(self):
+        html = (DOCS / "index.html").read_text(encoding="utf-8")
+        self.assertIn('href="https://madebyfrank.online/"', html)
+        self.assertIn('href="https://portfolio-jose-david-arias-pantojas-projects.vercel.app/"', html)
 
 
     def test_el_muro_tiene_los_cuatro_videos_aprobados(self):

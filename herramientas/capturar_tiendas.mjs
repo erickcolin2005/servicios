@@ -2,6 +2,7 @@
 // que salen al entrar (bienvenida, cookies, cierres por temporada).
 // Solo páginas públicas de la tienda: nunca paneles ni cuentas, que traen datos de personas.
 // Uso: npm run capturas   (CHROME=<ruta> si Chrome no está en la ruta de siempre)
+//      npm run capturas -- jm-lucent cafe-atelier   (solo las que se nombran)
 import puppeteer from 'puppeteer-core';
 
 const CHROME = process.env.CHROME ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
@@ -9,7 +10,10 @@ const TIENDAS = [
   ['jabones-rocio', 'https://jabonesrocio.com.co'],
   ['sos-natural', 'https://sosnaturalcolombia.com/productos-terminados/jabones-solidos'],
   ['verde-vivo-producto', 'https://verdevivoessentials.com/catalogo/shampoo-solido-manzanilla/'],
+  ['jm-lucent', 'https://www.jmlucent.com/'],
+  ['cafe-atelier', 'https://royalblue-stingray-925697.hostingersite.com/'],
 ];
+const PEDIDAS = process.argv.slice(2);
 
 // Quita lo que tapa la tienda: ventanas que ocupan buena parte de la pantalla y avisos de cookies.
 // El botón flotante de WhatsApp se queda: es parte de cómo vende la tienda.
@@ -33,6 +37,7 @@ function quitarAvisos() {
 const navegador = await puppeteer.launch({ executablePath: CHROME, headless: true });
 try {
   for (const [nombre, url] of TIENDAS) {
+    if (PEDIDAS.length && !PEDIDAS.includes(nombre)) continue;
     const pagina = await navegador.newPage();
     await pagina.setViewport({ width: 1280, height: 800 });
     await pagina.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
