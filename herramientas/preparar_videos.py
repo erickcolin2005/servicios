@@ -29,6 +29,12 @@ VIDEOS = {
     "donde-cae-el-pedido": ("DM-02", 4.0),  # visto bueno de Erick el 2026-09-27
     "el-panel-por-dentro": ("DM-03", 8.0),  # visto bueno de Erick el 2026-09-27
     "dos-tiendas-con-carrito": ("DM-01", 0.0),  # visto bueno de Erick el 2026-09-27
+    # Caso EAx: hechos en código (Remotion, src/piezas/CE_caso_eax), sin voz ni datos de clientes.
+    # Pedidos por Erick el 2026-10-22; se publican cuando él los vea.
+    "la-carpeta": ("CE-01", 2.6),
+    "las-decisiones": ("CE-02", 2.0),
+    "el-envio-con-frenos": ("CE-03", 2.6),
+    "en-tu-negocio": ("CE-04", 4.0),
 }
 
 

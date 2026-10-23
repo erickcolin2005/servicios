@@ -208,6 +208,13 @@ def revisar(carpeta: Path) -> list[str]:
         problemas.append("R12 transition: all")
     if re.search(r"\b(transition|animation)\s*:", css) and "prefers-reduced-motion" not in css:
         problemas.append("R12 hay movimiento sin prefers-reduced-motion")
+    # lo que se mueve sin parar se apaga para quien pide movimiento reducido
+    calma = re.search(r"@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{([\s\S]*?)\n\}", css)
+    for sel, cuerpo in re.findall(r"([^{}]+)\{([^{}]*)\}", re.sub(r"/\*[\s\S]*?\*/", "", css)):
+        if re.search(r"animation\s*:[^;]*\binfinite\b", cuerpo):
+            sel = sel.strip()
+            if not calma or sel not in calma.group(1):
+                problemas.append(f"R12 animación sin fin que no se apaga con movimiento reducido: {sel}")
 
     # R13 · los enlaces que abren otra pestaña no le dan acceso a la página original
     for t, a in lector.etiquetas:
@@ -234,11 +241,22 @@ def revisar(carpeta: Path) -> list[str]:
             problemas.append(f"R14 video que no existe: {nombre}")
         elif archivo.stat().st_size > LIMITE_VIDEO:
             problemas.append(f"R14 video de más de {LIMITE_VIDEO // 1_000_000} MB: {nombre}")
-    if videos:
-        guiones = " ".join((carpeta / a["src"]).read_text(encoding="utf-8") for t, a in lector.etiquetas
-                           if t == "script" and a.get("src") and not es_externa(a["src"]) and (carpeta / a["src"]).is_file())
-        if "prefers-reduced-motion" not in guiones:
-            problemas.append("R14 los videos se reproducen solos sin respetar prefers-reduced-motion")
+    # cada guion que reproduce videos tiene que mirar él mismo si se pidió movimiento reducido
+    # (que otro guion lo mire no basta: pasó con movimiento.js el 2026-10-22)
+    guiones = {a["src"]: (carpeta / a["src"]).read_text(encoding="utf-8") for t, a in lector.etiquetas
+               if t == "script" and a.get("src") and not es_externa(a["src"]) and (carpeta / a["src"]).is_file()}
+    if videos and not any(".play(" in g for g in guiones.values()):
+        problemas.append("R14 hay videos y ningún guion los reproduce")
+    for nombre, guion in guiones.items():
+        if ".play(" in guion and "prefers-reduced-motion" not in guion:
+            problemas.append(f"R14 {nombre} reproduce videos sin respetar prefers-reduced-motion")
+
+    # R15 · cifras que suben: el número escrito en la página es el real (es lo que ve quien no tiene
+    # JavaScript o pide movimiento reducido), y la animación solo llega hasta él
+    for m in re.finditer(r'<\w+[^>]*\bdata-hasta="([^"]*)"[^>]*>([^<]*)<', html_crudo):
+        hasta, escrito = m.group(1), m.group(2)
+        if re.findall(r"\d+", escrito) != [hasta]:
+            problemas.append(f"R15 la cifra escrita «{escrito.strip()}» no es la de su animación ({hasta})")
 
     return problemas
 
@@ -248,5 +266,5 @@ if __name__ == "__main__":
     encontrados = revisar(carpeta)
     for p in encontrados:
         print(p)
-    print(f"{len(encontrados)} problemas" if encontrados else "La página pasa las 14 reglas")
+    print(f"{len(encontrados)} problemas" if encontrados else "La página pasa las 15 reglas")
     sys.exit(1 if encontrados else 0)

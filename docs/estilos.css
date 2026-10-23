@@ -24,6 +24,14 @@
   --sombra-honda: 0 30px 80px -40px rgba(0, 0, 0, 0.7), 0 6px 20px -10px rgba(0, 0, 0, 0.5);
   --velo: rgba(15, 23, 42, 0.7);
 
+  /* Capa neón de la marca (visual.md §2b): solo sobre las secciones oscuras, y siempre con su halo */
+  --neon-ambar: #fbbf24;
+  --neon-cian: #22d3ee;
+  --neon-cian-tenue: rgba(34, 211, 238, 0.14);
+  --halo-ambar: 0 0 10px rgba(251, 191, 36, 0.75), 0 0 28px rgba(251, 191, 36, 0.4);
+  --halo-texto: 0 0 12px rgba(251, 191, 36, 0.55), 0 0 32px rgba(251, 191, 36, 0.28);
+  --halo-cian: 0 0 8px rgba(34, 211, 238, 0.55), 0 0 22px rgba(34, 211, 238, 0.3);
+
   --impacto: 'Archivo Black', 'Arial Black', sans-serif;
   --editorial: 'Instrument Serif', Georgia, serif;
   --cuerpo: 'Inter', system-ui, sans-serif;
@@ -59,6 +67,7 @@ p { margin: 0 0 1rem; }
 .voz { display: block; font-family: var(--editorial); font-style: italic; font-size: clamp(1.9rem, 4.6vw, 3.2rem); line-height: 1.1; }
 .golpe { display: block; font-family: var(--impacto); text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(2.3rem, 7vw, 5.2rem); line-height: 1.05; }
 .clave { color: var(--ambar); }
+.oscuro .clave { color: var(--neon-ambar); text-shadow: var(--halo-texto); }
 .titulo-seccion { font: 400 clamp(1.8rem, 4.4vw, 3rem)/1.08 var(--impacto); letter-spacing: -0.01em; margin: 0 0 1.4rem; max-width: 22ch; }
 h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .lectura { max-width: 62ch; }
@@ -91,6 +100,20 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .barra .enlace { font-size: 0.95rem; }
 .portada__cuerpo { padding-top: clamp(2.5rem, 8vw, 5.5rem); }
 .portada .voz { color: var(--claro-suave); }
+/* La barra de luz bajo el titular, como en el banner del sitio personal de Erick, en ámbar y sin degradado */
+.portada .titular::after {
+  content: "";
+  display: block;
+  width: min(18rem, 70%);
+  height: 4px;
+  margin-top: 1.3rem;
+  border-radius: 2px;
+  background: var(--neon-ambar);
+  box-shadow: var(--halo-ambar);
+  transform-origin: left center;
+  animation: barrido 4s ease-in-out infinite alternate;
+}
+@keyframes barrido { from { transform: scaleX(0.12); } to { transform: scaleX(1); } }
 .entrada { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--claro-suave); max-width: 52ch; margin-bottom: 2rem; }
 .acciones { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 .servicios-indice {
@@ -125,6 +148,9 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
   color: var(--claro-suave);
 }
 .pildora::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ambar); flex: none; }
+/* Punto encendido: hay videos reproduciéndose en esta sección */
+.pildora--viva::before { background: var(--neon-ambar); box-shadow: var(--halo-ambar); animation: pulso 2s ease-in-out infinite; }
+@keyframes pulso { 50% { opacity: 0.35; } }
 
 /* Muro de videos: lo que ya funciona, antes que cualquier explicación */
 .muro { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--borde-oscuro); }
@@ -165,6 +191,11 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .muro__item:not(.muro__item--grande) .muro__sonido { padding: 0.42rem 0.55rem; }
 .muro__item:not(.muro__item--grande) .muro__sonido span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .muro__sonido[aria-pressed="true"] { background: var(--ambar); color: var(--navy); border-color: var(--ambar); }
+/* El video que suena se enciende: así se sabe cuál es */
+.muro__item.sonando .muro__marco { border-color: var(--neon-ambar); box-shadow: var(--halo-ambar), var(--sombra-honda); }
+.muro__pausa svg + svg { display: none; }
+.muro__pausa[aria-pressed="true"] svg:first-child { display: none; }
+.muro__pausa[aria-pressed="true"] svg + svg { display: block; }
 .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .solo-lectores:focus { position: static; width: auto; height: auto; overflow: visible; clip-path: none; color: var(--claro-suave); font: 400 0.72rem/1.3 var(--tecnico); }
 .muro__llamada {
@@ -202,7 +233,7 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .modalidades dd { margin: 0; }
 .nota { color: var(--claro-suave); font-size: 0.95rem; }
 .prueba { align-self: start; background: var(--navy-2); border-radius: 16px; padding: clamp(1.4rem, 4vw, 2.2rem); }
-.prueba__cifra { font: 400 clamp(2.4rem, 6vw, 3.6rem)/1 var(--impacto); color: var(--ambar); margin: 0.4rem 0 1rem; }
+.prueba__cifra { font: 400 clamp(2.4rem, 6vw, 3.6rem)/1 var(--impacto); color: var(--neon-ambar); text-shadow: var(--halo-texto); margin: 0.4rem 0 1rem; }
 
 /* Capacitación */
 .formatos { list-style: none; margin: 0 0 2.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -225,13 +256,38 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 .caso-eax .lectura { color: var(--claro-suave); }
 .cifras { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
 .cifras li { display: grid; grid-template-columns: 4.2rem 1fr; gap: 1rem; align-items: baseline; padding-top: 0.9rem; border-top: 1px solid var(--borde-oscuro); }
-.cifras strong { font: 400 1.9rem/1 var(--impacto); color: var(--ambar); }
-.arbol { align-self: start; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid var(--borde-oscuro); border-radius: 16px; background: var(--navy-2); box-shadow: var(--sombra-honda); }
+.cifras strong { font: 400 1.9rem/1 var(--impacto); color: var(--neon-ambar); text-shadow: var(--halo-texto); }
+.arbol { position: relative; overflow: hidden; align-self: start; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid var(--borde-oscuro); border-radius: 16px; background: var(--navy-2); box-shadow: var(--sombra-honda); }
+/* La línea que recorre la carpeta cuando aparece en pantalla, como la IA en el video 01 */
+.arbol::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 2px solid var(--neon-ambar);
+  filter: drop-shadow(0 0 6px var(--neon-ambar)) drop-shadow(0 0 14px var(--neon-ambar));
+  opacity: 0;
+  pointer-events: none;
+}
+.arbol.leyendo::after { animation: escaner 2.6s ease-in-out 1 both; }
+.arbol.leyendo code { animation: encender 0.9s ease-out both; animation-delay: calc(var(--i, 0) * 0.2s + 0.15s); }
+@keyframes escaner {
+  0% { opacity: 0; transform: translateY(0); }
+  8%, 90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(100%); }
+}
+@keyframes encender {
+  40% { color: var(--neon-ambar); text-shadow: var(--halo-texto); }
+}
 .arbol__raiz { margin: 0 0 0.8rem; font: 400 0.9rem/1.4 var(--tecnico); color: var(--claro); }
 .arbol ul { list-style: none; margin: 0; padding: 0 0 0 1rem; border-left: 1px solid var(--borde-oscuro); display: grid; gap: 0.75rem; }
 .arbol li { display: grid; gap: 0.15rem; }
 .arbol code { font: 400 0.82rem/1.4 var(--tecnico); color: var(--ambar); }
 .arbol span { font-size: 0.92rem; line-height: 1.45; color: var(--claro-suave); }
+/* Los videos del caso EAx: sin voz, cuatro iguales, cada uno con su botón de pausa */
+.sistema-videos { margin-top: clamp(2.8rem, 7vw, 4.5rem); }
+.sistema-videos__titulo { margin: 0 0 1.4rem; font: 400 clamp(1.5rem, 3.4vw, 2.2rem)/1.15 var(--editorial); font-style: italic; color: var(--claro); }
+.sistema-videos .muro__rejilla { gap: 0.9rem 0.7rem; }
+.sistema-videos .muro__marco { border-color: var(--neon-cian-tenue); }
 .resultados { list-style: none; margin: 2.8rem 0 1.2rem; padding: 0; display: grid; gap: 0.9rem; max-width: 62ch; }
 .resultados li { padding-left: 1rem; border-left: 3px solid var(--ambar); }
 
@@ -261,4 +317,5 @@ h3 { font: 400 1.35rem/1.2 var(--impacto); margin: 0 0 0.35rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .boton, .boton--hueco, .muro__sonido { transition: none; }
+  .portada .titular::after, .pildora--viva::before { animation: none; }
 }

@@ -35,6 +35,16 @@ class LaPagina(unittest.TestCase):
         for video in ("en-un-minuto", "donde-cae-el-pedido", "el-panel-por-dentro", "dos-tiendas-con-carrito"):
             self.assertIn(f'data-src="video/{video}.mp4"', html)
 
+    def test_el_caso_eax_tiene_sus_cuatro_videos(self):
+        html = (DOCS / "index.html").read_text(encoding="utf-8")
+        caso = html[html.index('id="caso-eax"'):]
+        for video in ("la-carpeta", "las-decisiones", "el-envio-con-frenos", "en-tu-negocio"):
+            self.assertIn(f'data-src="video/{video}.mp4"', caso)
+
+    def test_las_cifras_que_suben_son_las_verificadas(self):
+        html = (DOCS / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(sorted(re.findall(r'data-hasta="(\d+)"', html)), ["15", "30", "40", "5", "77"])
+
 
 class CadaReglaAtrapaSuDefecto(unittest.TestCase):
     def setUp(self):
@@ -113,6 +123,10 @@ class CadaReglaAtrapaSuDefecto(unittest.TestCase):
         self.mutar("estilos.css", lambda c: c + "\n.extra { transition: all 0.3s; }\n")
         self.marca("R12")
 
+    def test_r12_animacion_sin_fin_que_no_se_apaga(self):
+        self.mutar("estilos.css", lambda c: c.replace(", .pildora--viva::before { animation: none; }", " { animation: none; }", 1))
+        self.marca("R12")
+
     def test_r13_pestana_nueva_sin_noopener(self):
         self.mutar("index.html", lambda h: h.replace('rel="noopener"', 'rel="external"', 1))
         self.marca("R13")
@@ -128,6 +142,14 @@ class CadaReglaAtrapaSuDefecto(unittest.TestCase):
     def test_r14_reproduccion_sin_respetar_movimiento_reducido(self):
         self.mutar("videos.js", lambda j: j.replace("prefers-reduced-motion", "prefers-color-scheme"))
         self.marca("R14")
+
+    def test_r15_cifra_escrita_en_cero(self):
+        self.mutar("index.html", lambda h: h.replace('data-hasta="30">30<', 'data-hasta="30">0<', 1))
+        self.marca("R15")
+
+    def test_r15_animacion_que_llega_a_otra_cifra(self):
+        self.mutar("index.html", lambda h: h.replace('data-hasta="77"', 'data-hasta="90"', 1))
+        self.marca("R15")
 
 
 if __name__ == "__main__":
